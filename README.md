@@ -4,7 +4,6 @@
 получаем сообщение, его потом отправляем в Telegram бот.
 <br>
 #### Функционал
-ункционал:
 1. Авторизация
 2. Регистрация
 3. Генерация токена для телеграм бота. (Только после авторизации)
@@ -21,7 +20,7 @@ Django==4.1.5
 DRF 3.14.0
 djoser==2.1.0
 <br>
-### API documentation
+#### API documentation
 POST /api/v1/auth/users/ - регистрация пользователя (обязательные поля: username, password, name)
 POST /auth/token/login/ - получение токена (обязательные поля: username, password)
 POST /api/v1/messages/ - создание сообщения
