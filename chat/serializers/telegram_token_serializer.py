@@ -18,6 +18,7 @@ class TelegramTokenSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
 class CheckTelegramTokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -25,7 +26,6 @@ class CheckTelegramTokenSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if data.get('telegram_token'):
-            print('data', data)
             try:
                 uuid.UUID(str(data.get('telegram_token')))
             except ValueError:
@@ -33,6 +33,3 @@ class CheckTelegramTokenSerializer(serializers.ModelSerializer):
             return data
         else:
             raise serializers.ValidationError("you don't sent telegram_token")
-
-
-

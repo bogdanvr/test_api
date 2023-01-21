@@ -23,7 +23,6 @@ class ListCreateMessages(ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         """Отправка сообщения в телеграмм"""
-        print(f'request {request.user} {request.user.chat_id}', request.data['text'])
         send_message_to_telegram(
             chat_id=request.user.chat_id,
             user=request.user,
@@ -43,10 +42,7 @@ class CheckTelegramToken(APIView):
     """Проверяет полученный токен от телеграмм"""
     permission_classes = AllowAny,
 
-    # serializer_class = CheckTelegramTokenSerializer
-
     def post(self, request):
-        print(request.data)
         serializer = CheckTelegramTokenSerializer(data=request.data)
         if serializer.is_valid():
             data = request.data

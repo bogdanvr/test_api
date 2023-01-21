@@ -35,6 +35,7 @@ def check_telegram_token(token, chat_id):
     result = find_telegram_token(token, chat_id)
     return result
 
+
 def send_message_to_telegram(chat_id, user, text):
     """Отправляет сообщение в телеграмм"""
     message = f'{user}, я получил от тебя сообщение:\n{text}'
