@@ -4,6 +4,11 @@ import requests
 
 from testapi.settings import TELEGRAM_BOT_TOKEN
 from users.models import User
+from loguru import logger
+
+logger.add('test_api_debug.log', format="{time} {level} {message}",
+           level="DEBUG", rotation="10:00", compression=zip
+           )
 
 
 def generate_token_for_telegram():
@@ -35,8 +40,9 @@ def check_telegram_token(token, chat_id):
     result = find_telegram_token(token, chat_id)
     return result
 
-
+@logger.catch
 def send_message_to_telegram(chat_id, user, text):
+    logger.debug(f'send_message_to_telegram params {chat_id}, {user}, {text}')
     """Отправляет сообщение в телеграмм"""
     message = f'{user}, я получил от тебя сообщение:\n{text}'
     data = {'chat_id': chat_id, 'text': message}

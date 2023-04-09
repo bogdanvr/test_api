@@ -38,10 +38,13 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'chat.apps.ChatConfig',
+    'tax.apps.TaxConfig',
+    'words.apps.WordsConfig',
 
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'django_filters'
 
 ]
 
