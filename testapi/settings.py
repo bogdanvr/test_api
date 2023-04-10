@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-uc1%i+@s%zs80u97oehw1648#zjik=1!+@125wq%8&9r4!t@2k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://bayes.hopto.org', 'http://localhost:8080']
 
 # Application definition
 
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'tax.apps.TaxConfig',
     'words.apps.WordsConfig',
-
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -83,9 +84,13 @@ WSGI_APPLICATION = 'testapi.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default':{
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                   'NAME': 'abidb',
+                           'USER': 'bogdan',
+                                   'PASSWORD': ';F9pHF0KPz',
+                                           'HOST': 'localhost',
+                                                   'PORT': '',
     }
 }
 
@@ -124,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -146,3 +152,14 @@ DJOSER = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TELEGRAM_BOT_TOKEN = os.getenv('token_telegram_bot')
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+CORS_ALLOWED_ORIGINS = [
+    "http://bayes.hopto.org",
+    "http://localhost:8080",
+]
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+               'http://localhost:8080',
+               'http://bayes.hopto.org',
+ )
