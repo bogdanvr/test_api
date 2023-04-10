@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
+from dotenv import load_dotenv
 from pathlib import Path
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,16 +85,20 @@ WSGI_APPLICATION = 'testapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-ABIDB_HOST = os.getenv('ABIDB_HOST')
-ABIDB_USER = os.getenv('ABIDB_USER')
-ABIDB_PSWD = os.getenv('ABIDB_PSWD')
+# ABIDB_HOST = os.getenv('ABIDB_HOST')
+# ABIDB_USER = os.getenv('ABIDB_USER')
+# ABIDB_PSWD = os.getenv('ABIDB_PSWD')
+DBHOST = os.getenv('ABIDB_HOST')
+DBUSER = os.getenv('ABIDB_USER')
+DBPSWD = os.getenv('ABIDB_PSWD')
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': ABIDB_HOST,
-        'USER': ABIDB_USER,
-        'PASSWORD': ABIDB_PSWD,
+        'NAME': DBHOST,
+        'USER': DBUSER,
+        'PASSWORD': DBPSWD,
         'HOST': 'localhost',
         'PORT': '',
     }
