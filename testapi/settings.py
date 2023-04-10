@@ -94,7 +94,6 @@ WSGI_APPLICATION = 'testapi.wsgi.application'
 DBHOST = os.getenv('DBHOST')
 DBUSER = os.getenv('DBUSER')
 DBPSWD = os.getenv('DBPSWD')
-logger.debug(DBPSWD)
 
 
 DATABASES = {
@@ -107,7 +106,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-print('dbhost', )
 AUTH_USER_MODEL = 'users.User'
 
 # Password validation
