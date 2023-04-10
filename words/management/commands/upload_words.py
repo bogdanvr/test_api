@@ -5,8 +5,6 @@ from users.models import User
 import csv
 
 
-
-
 class Command(BaseCommand):
     help = 'Upload words to base. To do this,' \
            ' you need to upload a file "words.csv" to the root directory of the site.'
@@ -23,4 +21,3 @@ class Command(BaseCommand):
             for row in reader:
                 print('row', row)
                 Words.objects.create(word=row[0], translate=row[1], user=user)
-
