@@ -9,13 +9,16 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import environ
 import os
-from dotenv import load_dotenv
 from pathlib import Path
-load_dotenv()
+from loguru import logger
 
+logger.add("loguru.log", format="{time} {level} {message}", level="DEBUG")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -24,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-uc1%i+@s%zs80u97oehw1648#zjik=1!+@125wq%8&9r4!t@2k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,9 +91,10 @@ WSGI_APPLICATION = 'testapi.wsgi.application'
 # ABIDB_HOST = os.getenv('ABIDB_HOST')
 # ABIDB_USER = os.getenv('ABIDB_USER')
 # ABIDB_PSWD = os.getenv('ABIDB_PSWD')
-DBHOST = os.getenv('ABIDB_HOST')
-DBUSER = os.getenv('ABIDB_USER')
-DBPSWD = os.getenv('ABIDB_PSWD')
+DBHOST = os.getenv('DBHOST')
+DBUSER = os.getenv('DBUSER')
+DBPSWD = os.getenv('DBPSWD')
+logger.debug(DBPSWD)
 
 
 DATABASES = {
@@ -103,7 +107,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+print('dbhost', )
 AUTH_USER_MODEL = 'users.User'
 
 # Password validation
@@ -173,3 +177,5 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
     'http://bayes.hopto.org',
 )
+
+
