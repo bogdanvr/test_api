@@ -83,14 +83,18 @@ WSGI_APPLICATION = 'testapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+ABIDB_HOST = os.getenv('ABIDB_HOST')
+ABIDB_USER = os.getenv('ABIDB_USER')
+ABIDB_PSWD = os.getenv('ABIDB_PSWD')
+
 DATABASES = {
-        'default':{
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                   'NAME': 'abidb',
-                           'USER': 'bogdan',
-                                   'PASSWORD': ';F9pHF0KPz',
-                                           'HOST': 'localhost',
-                                                   'PORT': '',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': ABIDB_HOST,
+        'USER': ABIDB_USER,
+        'PASSWORD': ABIDB_PSWD,
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -160,6 +164,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-               'http://localhost:8080',
-               'http://bayes.hopto.org',
- )
+    'http://localhost:8080',
+    'http://bayes.hopto.org',
+)
