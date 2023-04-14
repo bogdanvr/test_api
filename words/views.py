@@ -3,18 +3,27 @@ from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 
 from tax.filters import TaxFilter
-from words.filters import PhraseFilter
+from words.filters import PhraseFilter, WordsFilter
 from words.models import Words, Phrases
 from tax.serializers.tax_serializer import TaxSerializer
 from words.serializers.phrase_serializer import PhraseSerializer
 from words.serializers.word_serializer import WordSerializer
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    # max_page_sze = 1000
 
 
 class WordModelViewSet(ModelViewSet):
     queryset = Words.objects.all()
     serializer_class = WordSerializer
     filter_backends = DjangoFilterBackend,
+    pagination_class = StandardResultsSetPagination
+    filterset_class = WordsFilter
 
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)

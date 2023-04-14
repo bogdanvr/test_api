@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'tax.apps.TaxConfig',
     'words.apps.WordsConfig',
+    'web_app.apps.WebAppConfig',
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
