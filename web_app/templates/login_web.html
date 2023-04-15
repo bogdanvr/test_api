@@ -76,10 +76,10 @@
               <v-container>
                 <v-row>
                   <v-col cols="12">
-                    <v-text-field label="Логин*" required></v-text-field>
+                    <v-text-field v-model="login" label="Логин*" required></v-text-field>
                   </v-col>
                   <v-col cols="12">
-                    <v-text-field label="Пароль*" type="password" required></v-text-field>
+                    <v-text-field v-model="password" label="Пароль*" type="password" required></v-text-field>
                   </v-col>
 
 
@@ -89,8 +89,8 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+              <v-btn color="blue darken-1" text @click="dialog = false">Закрыть</v-btn>
+              <v-btn color="blue darken-1" text @click="login">Войти</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -115,6 +115,8 @@
       mounted() {
       },
       data: {
+        login: '',
+        password: '',
         message: 'Войти',
         drawer: null,
         dialog: true,
@@ -123,6 +125,10 @@
         // djangoData: jsVariable
       },
       methods: {
+        async login(){
+        data = {username: this.login, password: this.password}
+        const res = await fetch('https://bayes.hopto.org/auth/token/login/', data)
+        }
         openContact(){
           this.dialog = true
         },
