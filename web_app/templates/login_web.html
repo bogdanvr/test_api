@@ -1,111 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-  <title>My first Vue app</title>
-  <script src="https://unpkg.com/vue"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 </head>
 <body>
 <!-- {{  tt|json_script:"djangoData" }}-->
-  <div id="app">
+{% csrf_token %}
+<div id="app">
     <v-app id="inspire">
-      <v-app id="inspire">
-        <v-navigation-drawer
-          v-model="drawer"
-          app
-        >
-          <v-list dense>
-            <v-list-item link>
-              <v-list-item-action>
-                <v-icon>mdi-home</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>Home</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item
-             link
-             @click="openContact"
-             >
-              <v-list-item-action>
-                <v-icon>mdi-email</v-icon>
-              </v-list-item-action>
-              <v-list-item-content >
-                <v-list-item-title>Contact</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-navigation-drawer>
+        <v-app id="inspire">
+            <v-navigation-drawer
+                    v-model="drawer"
+                    app
+            >
+                <v-list dense>
+                    <v-list-item link>
+                        <v-list-item-action>
+                            <v-icon>mdi-home</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                            <v-list-item-title>Home</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item
+                            link
+                            @click="openContact"
+                    >
+                        <v-list-item-action>
+                            <v-icon>mdi-email</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                            <v-list-item-title>Contact</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </v-navigation-drawer>
 
-        <v-app-bar
-          app
-          color="indigo"
-          dark
-        >
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-          <v-toolbar-title>Application</v-toolbar-title>
-        </v-app-bar>
+            <v-app-bar
+                    app
+                    color="indigo"
+                    dark
+            >
+                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+                <v-toolbar-title>Application</v-toolbar-title>
+            </v-app-bar>
 
-        <v-main>
+            <v-main>
 
-        </v-main>
-        <v-footer
-          color="indigo"
-          app
-        >
-          <span class="white--text"></span>
-        </v-footer>
-      </v-app>
+            </v-main>
+            <v-footer
+                    color="indigo"
+                    app
+            >
+                <span class="white--text"></span>
+            </v-footer>
+        </v-app>
     </v-app>
     <template>
-      <v-row justify="center">
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <v-card>
-            <v-card-title>
-              {% verbatim %}
-                <span class="headline">{{ message }}</span>
-              {% endverbatim %}
+        <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="600px">
+                <v-card>
+                    <v-card-title>
+                        {% verbatim %}
+                        <span class="headline">{{ message }}</span>
+                        {% endverbatim %}
 
-              <span></span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field v-model="login" label="Логин*" required></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field v-model="password" label="Пароль*" type="password" required></v-text-field>
-                  </v-col>
+                        <span></span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-text-field v-model="login" label="Логин*" required></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field v-model="password" label="Пароль*" type="password"
+                                                  required></v-text-field>
+                                </v-col>
 
 
-                </v-row>
-              </v-container>
-              <small>* Обязательные поля</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">Закрыть</v-btn>
-              <v-btn color="blue darken-1" text @click="login">Войти</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-row>
+                            </v-row>
+                        </v-container>
+                        <small>* Обязательные поля</small>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="dialog = false">Закрыть</v-btn>
+                        <v-btn color="blue darken-1" text @click="loginFunction">Войти</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
     </template>
-  </div>
-  <script>
+</div>
+<script>
  // let jsVariable = JSON.parse(document.getElementById('djangoData').textContent);
- </script>
-  <script>
+
+
+
+</script>
+<script>
+  var csrftoken = '{{ csrf_token }}';
+</script>
+<script>
       var myVar = "{{ name_context }}"
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-  <script>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+    let tg = window.Telegram.WebApp
+    tg.close()
+</script>
+<script>
     var app = new Vue({
       el: '#app',
       vuetify: new Vuetify(),
@@ -123,22 +137,53 @@
         ageList: ['0-15', '16-45', '46-125'],
         visionButton: false,
         // djangoData: jsVariable
+        tgData: tg,
       },
       methods: {
-        async login(){
+        sendMessageToTelegram(message){
+        data = {chat_id: 127037610, text: message}
+        token = '5827549315:AAEdT9__Bkua-Qx3onszy4TfQbOGRMdKYng'
+        fetch('https://api.telegram.org/${token}/sendMessage',{method: 'POST', headers, body: JSON.stringify(data)}, )
+        .then((response) => {
+        return response.json();
+        })
+        .then((data) => {
+        console.log('authToken', data)
+        tgData.initDataUnsafe
+        tgData.sendData(JSON.stringify(data))
+        tgData.close()
+        })},
+        loginFunction(){
         data = {username: this.login, password: this.password}
-        const res = await fetch('https://bayes.hopto.org/auth/token/login/', data)
-        console.log('res', res)
-        },
+         headers = {
+            'Content-Type': "application/json",
+            'X-CSRFToken': csrftoken
+         },
+        console.log('data', data)
+        console.log('headers', headers)
+        fetch('http://localhost:8080/auth/token/login/',{method: 'POST', headers, body: JSON.stringify(data)}, )
+        .then((response) => {
+        return response.json();
+        })
+        .then((data) => {
+        console.log('authToken', data)
+        tg.sendData(JSON.stringify(data))
+        tg.close()
+        message = JSON.stringify(tg.initDataUnsafe)
+        this.sendMessageToTelegram(message)
+        })},
         openContact(){
           this.dialog = true
         },
+
+
+
         visionMethod(){
           console.log('visionButton', this.visionButton)
           this.visionButton = !this.visionButton
           console.log('visible work')
           console.log('visionButton', this.visionButton)
-        }
+        },
       },
       computed:{
         mesReversed: function(){
@@ -147,14 +192,20 @@
       },
 
     })
-  </script>
-  <style>
+
+
+
+</script>
+<style>
       .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
 }
-  </style>
+
+
+
+</style>
 </body>
 </html>

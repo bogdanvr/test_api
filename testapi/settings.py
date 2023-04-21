@@ -167,10 +167,12 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 CORS_ALLOWED_ORIGINS = [
     "http://bayes.hopto.org",
     "http://localhost:8080",
+    "http://localhost:8000",
 ]
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
+    'http://localhost:8000',
     'http://bayes.hopto.org',
 )
 
