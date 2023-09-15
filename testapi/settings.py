@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import environ
+# import environ
 import os
 from pathlib import Path
 from loguru import logger
@@ -17,7 +17,7 @@ from loguru import logger
 logger.add("loguru.log", format="{time} {level} {message}", level="DEBUG")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+# environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'chat.apps.ChatConfig',
     'tax.apps.TaxConfig',
     'words.apps.WordsConfig',
-    'web_app.apps.WebAppConfig',
+    'pages.apps.PagesConfig',
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'testapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DBHOST = os.getenv('DBHOST')
-DBUSER = os.getenv('DBUSER')
-DBPSWD = os.getenv('DBPSWD')
+DBHOST = os.getenv('OLXAPIHOST')
+DBUSER = os.getenv('OLXAPIUSER')
+DBPSWD = os.getenv('OLXAPIPSWD')
 
 
 DATABASES = {
