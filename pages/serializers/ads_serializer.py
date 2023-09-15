@@ -12,10 +12,10 @@ class AdsSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # user = self.context.get("request").user
 
-        Ad = Ads.objects.create(
+        ad = Ads.objects.create(
             title=validated_data['title'],
             page_id=validated_data['page_id'],
             url=validated_data['url'],
         )
-        Ad.save()
-        return Ad
+        ad.save()
+        return ad
